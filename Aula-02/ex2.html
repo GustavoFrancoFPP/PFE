@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Cartão de Visitas</title>
+    <style>
+        body {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        .formulario {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .cartao {
+            min-width: 250px;
+            min-height: 120px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px #aaa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: var(--cor-cartao, #e0e0e0);
+            color: #222;
+            font-size: 1.2em;
+            padding: 20px;
+            transition: background 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="formulario">
+        <label>
+            Nome:
+            <input type="text" id="nome" placeholder="Seu nome">
+        </label>
+        <label>
+            Cargo:
+            <input type="text" id="cargo" placeholder="Seu cargo">
+        </label>
+        <label>
+            Cor do cartão:
+            <select id="cor">
+                <option value="#e0e0e0">Cinza</option>
+                <option value="#ffb3b3">Vermelho</option>
+                <option value="#b3d1ff">Azul</option>
+                <option value="#b3ffb3">Verde</option>
+                <option value="#fff7b3">Amarelo</option>
+                <option value="#ffcc99">Laranja</option>
+                <option value="#ffffff">Branco</option>
+                <option value="#000000">Preto</option>
+            </select>
+        </label>
+    </div>
+    <div class="cartao" id="cartao">
+        <div id="cartao-nome">Seu nome</div>
+        <div id="cartao-cargo">Seu cargo</div>
+    </div>
+    <script>
+        const nomeInput = document.getElementById('nome');
+        const cargoInput = document.getElementById('cargo');
+        const corInput = document.getElementById('cor');
+        const cartao = document.getElementById('cartao');
+        const cartaoNome = document.getElementById('cartao-nome');
+        const cartaoCargo = document.getElementById('cartao-cargo');
+
+        nomeInput.oninput = function() {
+            cartaoNome.innerText = nomeInput.value || 'Seu nome';
+        };
+        cargoInput.oninput = function() {
+            cartaoCargo.innerText = cargoInput.value || 'Seu cargo';
+        };
+        corInput.oninput = function() {
+            cartao.style.setProperty('--cor-cartao', corInput.value);
+        };
+    </script>
+</body>
+</html>
