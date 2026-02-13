@@ -5,6 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversor de Temperatura</title>
+        <style>
+            body {
+                transition: background-color 1s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            button {
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            div {
+                margin-top: 20px;
+                text-align: center;
+            }
+        </style>
 </head>
 <body>
 <div>
@@ -12,26 +29,3 @@
        <input type="number" id="celsiusInput" placeholder="Digite a temperatura em celsius">
        <button onclick="converterTemperatura()">Converter</button>
     <script src="ex1.js"></script>
-
-<style>
-    body {
-        transition: background-color 0.5s ease;
-    }
-    button {
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    div {
-        margin-top: 20px;
-        text-align: center;
-        
-    }
-</style>
-</div>
-</body>
-</html>
