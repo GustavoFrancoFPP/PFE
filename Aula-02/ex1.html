@@ -1,31 +1,66 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversor de Temperatura</title>
-        <style>
-            body {
-                transition: background-color 1s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-            button {
-                background-color: #4CAF50;
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-            div {
-                margin-top: 20px;
-                text-align: center;
-            }
-        </style>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            transition: background-color 1s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            z-index: 10; /* Garante que o painel fique na frente do fogo/neve */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+    </style>
 </head>
 <body>
-<div>
-       <h1>Conversor de Temperatura Dinâmico</h1>
-       <input type="number" id="celsiusInput" placeholder="Digite a temperatura em celsius">
-       <button onclick="converterTemperatura()">Converter</button>
+
+    <div class="container">
+        <h1>Conversor Dinâmico</h1>
+        <input type="number" id="celsiusInput" placeholder="Graus Celsius">
+        <button onclick="converterTemperatura()">Converter</button>
+    </div>
+
+    <canvas id="snowCanvas"></canvas>
+    <canvas id="fireCanvas"></canvas>
+
     <script src="ex1.js"></script>
+</body>
+</html>
