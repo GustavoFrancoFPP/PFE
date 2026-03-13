@@ -41,7 +41,8 @@
             
             <div class="stories-wrapper">
                 <div class="story-item">
-                    <div class="story-ring"><img src="/Aula-05/Formativa/IMG/samuel.jpg"></div>
+                    <div class="story-ring"><img src="/Aula-05/Formativa/IMG/foto.jpg"></div>
+                    
                     <span>Samuel</span>
                 </div>
                 <div class="story-item">
@@ -67,7 +68,7 @@
                     <div class="post-footer">
                         <div class="post-actions">
                             <div class="left-actions">
-                                <i class="far fa-heart"></i>
+                                <i class="far fa-heart like-btn" onclick="toggleLike(this)"></i>
                                 <i class="far fa-comment"></i>
                                 <i class="far fa-paper-plane"></i>
                             </div>
@@ -76,6 +77,12 @@
                         <div class="likes-count">67 curtidas</div>
                         <div class="caption">
                             <strong>Jezer</strong> Controle e Automação com os cabras de eletro
+                        </div>
+                        <div class="comments-section">
+                            <div class="comments-list">
+                                <div class="comment"><strong>Samuel</strong> Muito bom!</div>
+                            </div>
+                            <input type="text" class="comment-input" placeholder="Adicione um comentário..." onkeypress="addComment(event, this)">
                         </div>
                     </div>
                 </article>
@@ -87,12 +94,25 @@
                         <i class="fas fa-ellipsis"></i>
                     </div>
                     <div class="post-media">
-                    <video src="https://videos.pexels.com/video-files/4069480/4069480-sd_640_360_25fps.mp4" autoplay controls style="width:100%; border-radius:3px;"></video>
+                        <div class="carousel" id="carousel2">
+                            <div class="carousel-inner">
+                                <div class="carousel-item"><img src="IMG/foto2.jpg" alt="Slide 1"></div>
+                                <div class="carousel-item"><img src="IMG/foto3.jpg" alt="Slide 2"></div>
+                            </div>
+                            <div class="carousel-controls">
+                                <button onclick="prevSlide('carousel2')"><i class="fas fa-chevron-left"></i></button>
+                                <button onclick="nextSlide('carousel2')"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                            <div class="carousel-indicators">
+                                <div class="indicator active" onclick="goToSlide('carousel2', 0)"></div>
+                                <div class="indicator" onclick="goToSlide('carousel2', 1)"></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="post-footer">
                         <div class="post-actions">
                             <div class="left-actions">
-                                <i class="far fa-heart"></i>
+                                <i class="far fa-heart like-btn" onclick="toggleLike(this)"></i>
                                 <i class="far fa-comment"></i>
                                 <i class="far fa-paper-plane"></i>
                             </div>
@@ -101,6 +121,12 @@
                         <div class="likes-count">987 curtidas</div>
                         <div class="caption">
                             <strong>ReiDelas67</strong> Bom dia.
+                        </div>
+                        <div class="comments-section">
+                            <div class="comments-list">
+                                <div class="comment"><strong>Jefferson</strong> Bom dia também!</div>
+                            </div>
+                            <input type="text" class="comment-input" placeholder="Adicione um comentário..." onkeypress="addComment(event, this)">
                         </div>
                     </div>
                 </article>
@@ -117,7 +143,7 @@
                     <div class="post-footer">
                         <div class="post-actions">
                             <div class="left-actions">
-                                <i class="far fa-heart"></i>
+                                <i class="far fa-heart like-btn" onclick="toggleLike(this)"></i>
                                 <i class="far fa-comment"></i>
                                 <i class="far fa-paper-plane"></i>
                             </div>
@@ -127,11 +153,86 @@
                         <div class="caption">
                             <strong>RenatoSilvaxx</strong>
                         </div>
+                        <div class="comments-section">
+                            <div class="comments-list">
+                                <div class="comment"><strong>Guilherme</strong> Incrível!</div>
+                            </div>
+                            <input type="text" class="comment-input" placeholder="Adicione um comentário..." onkeypress="addComment(event, this)">
+                        </div>
                     </div>
                 </article>
             </section>
         </div>
     </main>
+
+    <script>
+        let currentSlides = {};
+
+        function initCarousel(carouselId) {
+            currentSlides[carouselId] = 0;
+            updateCarousel(carouselId);
+        }
+
+        function updateCarousel(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const inner = carousel.querySelector('.carousel-inner');
+            const indicators = carousel.querySelectorAll('.indicator');
+            inner.style.transform = `translateX(-${currentSlides[carouselId] * 50}%)`;
+            indicators.forEach((ind, i) => {
+                ind.classList.toggle('active', i === currentSlides[carouselId]);
+            });
+        }
+
+        function nextSlide(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const items = carousel.querySelectorAll('.carousel-item');
+            currentSlides[carouselId] = (currentSlides[carouselId] + 1) % items.length;
+            updateCarousel(carouselId);
+        }
+
+        function prevSlide(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const items = carousel.querySelectorAll('.carousel-item');
+            currentSlides[carouselId] = (currentSlides[carouselId] - 1 + items.length) % items.length;
+            updateCarousel(carouselId);
+        }
+
+        function goToSlide(carouselId, index) {
+            currentSlides[carouselId] = index;
+            updateCarousel(carouselId);
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            initCarousel('carousel2');
+        });
+
+        function toggleLike(btn) {
+            btn.classList.toggle('liked');
+            const postFooter = btn.closest('.post-footer');
+            const likesCount = postFooter.querySelector('.likes-count');
+            let count = parseInt(likesCount.textContent.split(' ')[0]);
+            if (btn.classList.contains('liked')) {
+                count++;
+                btn.classList.remove('far');
+                btn.classList.add('fas');
+            } else {
+                count--;
+                btn.classList.remove('fas');
+                btn.classList.add('far');
+            }
+            likesCount.textContent = count + ' curtidas';
+        }
+
+        function addComment(event, input) {
+            if (event.key === 'Enter' && input.value.trim() !== '') {
+                const commentsList = input.previousElementSibling;
+                const newComment = document.createElement('div');
+                newComment.className = 'comment';
+                newComment.innerHTML = '<strong>Você</strong>' + input.value;
+                commentsList.appendChild(newComment);
+                input.value = '';
+            }
+        }
+    </script>
 
 </body>
 </html>
