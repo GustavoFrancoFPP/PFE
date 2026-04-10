@@ -1,0 +1,23 @@
+{
+  "name": "aula_08",
+  "version": "1.0.0",
+  "description": "Atividade Prática: Desvendando a Estrutura React",
+  "keywords": [
+    "samuel"
+  ],
+  "homepage": "https://github.com/GustavoFrancoFPP/PFE#readme",
+  "bugs": {
+    "url": "https://github.com/GustavoFrancoFPP/PFE/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GustavoFrancoFPP/PFE.git"
+  },
+  "license": "ISC",
+  "author": "gustavo",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
